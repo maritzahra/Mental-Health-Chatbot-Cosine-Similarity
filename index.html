@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            background: linear-gradient(to top right, #000000, #6d47aa, #1d7fa0);
+            backdrop-filter: blur(50px);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #chat-container {
+            width: 70%;
+            height: 500px;
+            margin: 20px auto;
+            background-color: rgba(76, 74, 74, 0.5);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            margin-top: 50vh;
+            transform: translateY(-50%);
+        }
+
+        #chat-profile {
+            background-color: #2c3e50;
+            height: 80px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+        }
+
+
+        #profile-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            background-color: #e0e9eb;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAARuSURBVHgB7Zp/aFNXFMe/WZvYJM3a2ibWrm1if8aGreCPbUVXXbchptJtMjMF6T/bYGOwuT/G2NxABhsMxtiEwf7ZPwOFqf9oqeIfiq0WFVtRiz+qtk3bULW1tLFNrKmi9zxtTZOX5OUmV+T5PhBe3n3nXfJ959zzzrlE95CBF4iX8IKhCVY7mmC1owlWO5pgtZMJQQxOhdDqG0eOIQOrbS+jNNsQ1/7GxDT+Pz0gff/4DTsW52ZBBDoRpSWJrT94Ef6ZB9J5qdmAdrdLEi8Hif3yv052vDs39nfzCixz5CHdCAnp37qH58QSg4EQdvfdjmlPng0XOzsmAiGCBwP3osb8oQcx7SenZ6LGpu7dhwi0LK12NMFqRxOsdp5bwVSMiCDtgqnK6h4PIlWoEBEhOq2Cqbj4oWtItsiIVVYSliy97Ph3e86lXTR3LT3bHMyKu8NKyd29t+eVlOG0vFuN1YssstfOeselWlqOxblGVBZmw7Lg8UPJzspMqbngEhzZHCSCmofzH7wW8/rU9H1s3HlCtsSMBW9zwRXS1AgoFUu0vOeUjhPsnomI+7zBkOS1H5tcSIb2nhHwwNUPx1uP8+z0Gfh1RYlk7+noRcvwpDTebM/DVkc+PjszgIHgDOxmPb6usOGTNeX4t61X0dzPNKSJ7zuH8E/PLdlrJHRLeQG+cC6SwnlbRz92XR9NNCX2r3NiCUtgfx2+irY4HqRQpoig9Z0sKW0AUFj7Q9FtXKl5wbzzt3d1wetPnG23r3Lg09pXpO+TbF3fZK8mOoZjYeFfWWgBLylt8ZAn6ZMIR2YGxthaTYQ18+lcJMySgrBYCNvTCqepogA9V+InmcI8I1YW50I0KQm+emkE5zp9uBvhPaPJgBJ7LqpqbMi3ZuPD5cXo6PLhQu9YzLk+31CDopzHiSjAEtkxtsXjHfJH2ZmNergbKmDLN4EH7jU8NjqF7V8dSGj3zvpqNH70Kh7qdPiJvWu9vokoG8/6pdjsdkpC9x68jNajiTP1jm1vwVVVgGThLi2PHOpRbPfHz0foyeL3b9di46oyWAIz0sfGHvU3W5bNid3x53FFYokz54fBA3dIm0wGxba+gXG07uvGpubl2Lq5FuVFFgyxcnJdUw1ynrxayLNen1/xnFbOkOb2cIO7mq1Ps2J78nTwyVqvqy+Dh4mfFTsyFlTsWcJVWYDXa4vAQ0oe/mXn+5L3goGnNfDJtj6cbO+TvedUWz8a2JqO5NK12HvWa98sxUomjpIVYTbp4SjOAS8pv5aK7fMLeMrMRlYqHpVZ4xTGcvTLJDJiU+NSeBqdSCdCdjw2sKxsMusV2weD0V0SeTTdYgkhgincFyaxvuVwlPCHbTyE7Wklk8WfJdqupdrRBKsdTbDaESY4sgIjqAqTw1VljRqzLuRrDhIhTDBVW+HNRV39EtStKZO1pXrZ3VA+d07NgYeVlSLQif6DODUXtAOipLMaZV0T/Rje3Qwl6LR/xKscTbDa0QSrHU2w2tEEq51HMsKL6rHc748AAAAASUVORK5CYII=') center center / cover;
+            border: 2px solid #ffffff;
+            overflow: hidden;
+        }
+
+
+        #profile-text {
+            color: #ecf0f1;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #safe-zone-text {
+            color: #ecf0f1;
+            font-size: 12px;
+            font-weight: lighter;
+            margin-top: 5px;
+        }
+
+        #chat {
+            flex-grow: 1;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: scroll;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            margin-bottom: 5px;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #ffffff;
+            color: #000000;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #1280a5;
+            color: #f6ecec;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+        }
+
+        input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 28%;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #chat {
+            flex-grow: 1;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: scroll;
+            max-height: 400px;
+            display: flex;
+            
+        }
+
+        .message {
+            margin: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+            margin-top: 5px; /* Added margin-top for spacing between messages */
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+        <div id="chat-container">
+            <div id="chat-profile">
+                <div id="profile-image"></div>
+                <div>
+                    <div id="profile-text">Mental Health Chatbot</div>
+                    <div id="safe-zone-text">Here's your safe zone</div>
+                </div>
+            </div>
+            <div id="chat"></div>
+            <div class="input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function sendMessage() {
+    var userInput = document.getElementById('user-input').value;
+    
+    // Append user message
+    var userMessage = '<div class="message user-message">' + userInput + '</div>';
+    document.getElementById('chat').innerHTML = userMessage + document.getElementById('chat').innerHTML;
+
+    // Kirim pesan ke server Flask
+    fetch('/send_message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_input: userInput })
+    })
+    .then(response => response.json())
+    .then(data => {
+        var botResponse = data.response;
+
+        // Append bot message
+        var botMessage = '<div class="message bot-message">' + botResponse + '</div>';
+        document.getElementById('chat').innerHTML = botMessage + document.getElementById('chat').innerHTML;
+
+        // Scroll to the bottom of the chat
+        document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+    })
+    .catch(error => {
+        console.error('Error sending message:', error);
+    });
+
+    // Kosongkan input
+    document.getElementById('user-input').value = '';
+}
+
+    </script>
+</body>
+</html>
